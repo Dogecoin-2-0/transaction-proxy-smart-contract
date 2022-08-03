@@ -11,20 +11,36 @@ contract TransactionProxy is Ownable, AccessControl {
 
   bytes32 public withdrawerRole = keccak256(abi.encode("WITHDRAWER_ROLE"));
   uint256 public immutable deployTime;
+  uint256 public constant feeDeterminant = 10**9;
 
   constructor() {
     _grantRole(withdrawerRole, _msgSender());
     deployTime = block.timestamp;
   }
 
-  function calculateFee(uint256 amount) private view returns (uint256 fee) {
+  // Babylonian method (https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method)
+  function sqrt(uint256 y) private pure returns (uint256 z) {
+    if (y > 3) {
+      z = y;
+      uint256 x = y / 2 + 1;
+      while (x < z) {
+        z = x;
+        x = (y / x + x) / 2;
+      }
+    } else if (y != 0) {
+      z = 1;
+    }
+  }
+
+  function calculateFee(uint256 amount) public view returns (uint256 fee) {
     uint256 ratio = deployTime.mul(10).div(block.timestamp);
-    fee = ratio.mul(amount).div(10);
+    fee = sqrt((ratio.mul(amount)).div(10).sub(feeDeterminant));
   }
 
   function proxyTransferEther(address to) external payable {
     uint256 fee = calculateFee(msg.value);
-    uint256 amount = msg.value.sub(fee);
+    uint256 val = msg.value;
+    uint256 amount = val.sub(fee);
     TransferHelpers._safeTransferEther(to, amount);
   }
 
@@ -59,4 +75,6 @@ contract TransactionProxy is Ownable, AccessControl {
     require(hasRole(withdrawerRole, withdrawer), "not_yet_withdrawer");
     _revokeRole(withdrawerRole, withdrawer);
   }
+
+  receive() external payable {}
 }
