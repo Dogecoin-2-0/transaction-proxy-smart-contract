@@ -6,7 +6,11 @@
   "scripts": {
     "test": "npx hardhat test",
     "format": "prettier --write **/**/*.{js,json,sol}",
-    "deploy:testnet:bsc": "npx hardhat run scripts/deploy.js --network binance_testnet"
+    "deploy:testnet:bsc": "npx hardhat run scripts/deploy.js --network binance_testnet",
+    "deploy:testnet:avax": "npx hardhat run scripts/deploy.js --network avalanche_testnet",
+    "deploy:testnet:matic": "npx hardhat run scripts/deploy.js --network polygon_testnet",
+    "deploy:testnet:eth": "npx hardhat run scripts/deploy.js --network ethereum_testnet",
+    "deploy:testnet:all": "yarn deploy:testnet:bsc && yarn deploy:testnet:avax && yarn deploy:testnet:matic && yarn deploy:testnet:eth"
   },
   "repository": {
     "type": "git",

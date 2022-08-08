@@ -1,0 +1,6 @@
+{
+  "binance_testnet": "0x25072e9d140B184cd801aB7B97590e2205F643cb",
+  "avalanche_testnet": "0x2A631765beBF4131471Ff02DE98203A1D48F2ba3",
+  "polygon_testnet": "0xD8b7e53036d9e454b2D350C2Fb6c7a3d7923b390",
+  "ethereum_testnet": "0x33888922465aE600E9Db751D90B74d220072B242"
+}
