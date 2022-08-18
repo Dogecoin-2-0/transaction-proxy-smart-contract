@@ -10,7 +10,12 @@
     "deploy:testnet:avax": "npx hardhat run scripts/deploy.js --network avalanche_testnet",
     "deploy:testnet:matic": "npx hardhat run scripts/deploy.js --network polygon_testnet",
     "deploy:testnet:eth": "npx hardhat run scripts/deploy.js --network ethereum_testnet",
-    "deploy:testnet:all": "yarn deploy:testnet:bsc && yarn deploy:testnet:avax && yarn deploy:testnet:matic && yarn deploy:testnet:eth"
+    "deploy:testnet:all": "yarn deploy:testnet:bsc && yarn deploy:testnet:avax && yarn deploy:testnet:matic && yarn deploy:testnet:eth",
+    "deploy:mainnet:bsc": "npx hardhat run scripts/deploy.js --network binance_mainnet",
+    "deploy:mainnet:avax": "npx hardhat run scripts/deploy.js --network avalanche_mainnet",
+    "deploy:mainnet:matic": "npx hardhat run scripts/deploy.js --network polygon_mainnet",
+    "deploy:mainnet:eth": "npx hardhat run scripts/deploy.js --network ethereum_mainnet",
+    "deploy:mainnet:all": "yarn deploy:mainnet:bsc && yarn deploy:mainnet:avax && yarn deploy:mainnet:matic && yarn deploy:mainnet:eth"
   },
   "repository": {
     "type": "git",
